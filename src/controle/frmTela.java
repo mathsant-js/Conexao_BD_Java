@@ -25,6 +25,8 @@ public class frmTela extends javax.swing.JFrame {
         con_cliente = new Conexao();
         con_cliente.conecta();
         con_cliente.executaSQL("SELECT * FROM tblclientes order by cod");
+        preencherTabela();
+        
     }
 
     /**
@@ -198,6 +200,7 @@ public class frmTela extends javax.swing.JFrame {
     private javax.swing.JTextField telefoneText;
     // End of variables declaration//GEN-END:variables
 
+    // Método para preencher a tabela com os dados do banco de dados
     public void preencherTabela() {
         tblClientes.getColumnModel().getColumn(0).setPreferredWidth(4);
         tblClientes.getColumnModel().getColumn(1).setPreferredWidth(150);
@@ -220,6 +223,15 @@ public class frmTela extends javax.swing.JFrame {
                 }
         } catch (SQLException erro) {
             JOptionPane.showMessageDialog(null, "\n Erro ao listar dados da tabela!! :\n" + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void posicionarRegistro() {
+        try {
+            con_cliente.resultset.first();
+            // mostrar_Dados(); -> Método a ser adicionado
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível posicionar no primeiro registro: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
