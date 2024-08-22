@@ -24,9 +24,11 @@ public class frmTela extends javax.swing.JFrame {
         initComponents();
         con_cliente = new Conexao();
         con_cliente.conecta();
-        con_cliente.executaSQL("SELECT * FROM tblclientes order by cod");
+        con_cliente.executaSQL("SELECT * FROM tbclientes order by cod");
         preencherTabela();
-        
+        posicionarRegistro();
+        tblClientes.setAutoCreateRowSorter(true);
+        mostrarDados();
     }
 
     /**
@@ -93,27 +95,20 @@ public class frmTela extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(86, 86, 86)
-                                .addComponent(codInt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(97, 97, 97)
-                                .addComponent(emailText))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(81, 81, 81)
-                                .addComponent(telefoneText))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel3)
-                                .addGap(18, 18, 18)
-                                .addComponent(dataText))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(93, 93, 93)
-                                .addComponent(nomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(codInt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(emailText, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                .addComponent(telefoneText)
+                                .addComponent(nomeText)
+                                .addComponent(dataText))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -153,6 +148,54 @@ public class frmTela extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    
+    // Método para preencher a tabela com os dados do banco de dados
+    public void preencherTabela() {
+        tblClientes.getColumnModel().getColumn(0).setPreferredWidth(4);
+        tblClientes.getColumnModel().getColumn(1).setPreferredWidth(150);
+        tblClientes.getColumnModel().getColumn(2).setPreferredWidth(11);
+        tblClientes.getColumnModel().getColumn(3).setPreferredWidth(14);
+        tblClientes.getColumnModel().getColumn(4).setPreferredWidth(100);
+        
+        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
+        modelo.setNumRows(0);
+        
+        try {
+            con_cliente.resultset.beforeFirst();
+                while (con_cliente.resultset.next()) {
+                    modelo.addRow(new Object[]{
+                        con_cliente.resultset.getString("cod"), con_cliente.resultset.getString("cod"), 
+                        con_cliente.resultset.getString("nome"), con_cliente.resultset.getString("dt_nasc"), 
+                        con_cliente.resultset.getString("telefone"), con_cliente.resultset.getString("email")
+                        }   
+                    );
+                }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "\n Erro ao listar dados da tabela!! :\n" + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void posicionarRegistro() {
+        try {
+            con_cliente.resultset.first();
+            // mostrar_Dados(); -> Método a ser adicionado
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível posicionar no primeiro registro: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void mostrarDados() {
+        try {
+            codInt.setText(con_cliente.resultset.getString("cod")); // Associar a caixa ded texto ao campo cod
+            nomeText.setText(con_cliente.resultset.getString("nome"));
+            dataText.setText(con_cliente.resultset.getString("dt_nasc"));
+            telefoneText.setText(con_cliente.resultset.getString("telefone"));
+            emailText.setText(con_cliente.resultset.getString("email"));
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não localizou os dados: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -199,40 +242,4 @@ public class frmTela extends javax.swing.JFrame {
     private javax.swing.JTable tblClientes;
     private javax.swing.JTextField telefoneText;
     // End of variables declaration//GEN-END:variables
-
-    // Método para preencher a tabela com os dados do banco de dados
-    public void preencherTabela() {
-        tblClientes.getColumnModel().getColumn(0).setPreferredWidth(4);
-        tblClientes.getColumnModel().getColumn(1).setPreferredWidth(150);
-        tblClientes.getColumnModel().getColumn(2).setPreferredWidth(11);
-        tblClientes.getColumnModel().getColumn(3).setPreferredWidth(14);
-        tblClientes.getColumnModel().getColumn(4).setPreferredWidth(100);
-        
-        DefaultTableModel modelo = (DefaultTableModel) tblClientes.getModel();
-        modelo.setNumRows(0);
-        
-        try {
-            con_cliente.resultset.beforeFirst();
-                while (con_cliente.resultset.next()) {
-                    modelo.addRow(new Object[]{
-                        con_cliente.resultset.getString("cod"), con_cliente.resultset.getString("cod"), 
-                        con_cliente.resultset.getString("nome"), con_cliente.resultset.getString("dt_nasc"), 
-                        con_cliente.resultset.getString("telefone"), con_cliente.resultset.getString("email")
-                        }   
-                    );
-                }
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "\n Erro ao listar dados da tabela!! :\n" + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-    
-    public void posicionarRegistro() {
-        try {
-            con_cliente.resultset.first();
-            // mostrar_Dados(); -> Método a ser adicionado
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null, "Não foi possível posicionar no primeiro registro: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-    
 }
