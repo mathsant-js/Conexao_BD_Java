@@ -52,10 +52,10 @@ public class frmTela extends javax.swing.JFrame {
         dataText = new javax.swing.JTextField();
         telefoneText = new javax.swing.JTextField();
         emailText = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnPrimeiroRegistro = new javax.swing.JButton();
+        btnVoltarRegistro = new javax.swing.JButton();
+        btnAvancarRegistro = new javax.swing.JButton();
+        btnUltimoRegistro = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,13 +96,33 @@ public class frmTela extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblClientes);
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/First.png"))); // NOI18N
+        btnPrimeiroRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/First.png"))); // NOI18N
+        btnPrimeiroRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPrimeiroRegistroActionPerformed(evt);
+            }
+        });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Back.png"))); // NOI18N
+        btnVoltarRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Back.png"))); // NOI18N
+        btnVoltarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarRegistroActionPerformed(evt);
+            }
+        });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Forward.png"))); // NOI18N
+        btnAvancarRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Forward.png"))); // NOI18N
+        btnAvancarRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAvancarRegistroActionPerformed(evt);
+            }
+        });
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Last.png"))); // NOI18N
+        btnUltimoRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Last.png"))); // NOI18N
+        btnUltimoRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUltimoRegistroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -115,10 +135,10 @@ public class frmTela extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnPrimeiroRegistro, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnVoltarRegistro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel3)
                             .addComponent(jLabel2)
                             .addComponent(jLabel5)
@@ -132,9 +152,9 @@ public class frmTela extends javax.swing.JFrame {
                                 .addComponent(nomeText)
                                 .addComponent(dataText)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnAvancarRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(18, 18, 18)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(btnUltimoRegistro, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 591, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -165,10 +185,10 @@ public class frmTela extends javax.swing.JFrame {
                     .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4))
+                    .addComponent(btnPrimeiroRegistro)
+                    .addComponent(btnVoltarRegistro)
+                    .addComponent(btnAvancarRegistro)
+                    .addComponent(btnUltimoRegistro))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(87, 87, 87))
@@ -186,6 +206,42 @@ public class frmTela extends javax.swing.JFrame {
         telefoneText.setText(tblClientes.getValueAt(linha_selecionada, 3).toString());
         emailText.setText(tblClientes.getValueAt(linha_selecionada, 4).toString());
     }//GEN-LAST:event_tblClientesKeyPressed
+
+    private void btnPrimeiroRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroRegistroActionPerformed
+        try {
+            con_cliente.resultset.first();
+            mostrarDados();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível acessar o primeiro registro" + erro);
+        }
+    }//GEN-LAST:event_btnPrimeiroRegistroActionPerformed
+
+    private void btnVoltarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarRegistroActionPerformed
+        try {
+            con_cliente.resultset.previous();
+            mostrarDados();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível posicionar-se no registro anterior" + erro);
+        }
+    }//GEN-LAST:event_btnVoltarRegistroActionPerformed
+
+    private void btnAvancarRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAvancarRegistroActionPerformed
+        try {
+            con_cliente.resultset.next();
+            mostrarDados();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível posicionar-se no próximo registro" + erro);
+        }
+    }//GEN-LAST:event_btnAvancarRegistroActionPerformed
+
+    private void btnUltimoRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoRegistroActionPerformed
+        try {
+            con_cliente.resultset.last();
+            mostrarDados();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Não foi possível acessar o último registro" + erro);
+        }
+    }//GEN-LAST:event_btnUltimoRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,6 +294,8 @@ public class frmTela extends javax.swing.JFrame {
         }
     }
     
+    
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -271,13 +329,13 @@ public class frmTela extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAvancarRegistro;
+    private javax.swing.JButton btnPrimeiroRegistro;
+    private javax.swing.JButton btnUltimoRegistro;
+    private javax.swing.JButton btnVoltarRegistro;
     private javax.swing.JTextField codInt;
     private javax.swing.JTextField dataText;
     private javax.swing.JTextField emailText;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
