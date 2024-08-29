@@ -59,7 +59,7 @@ public class frmTela extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
-        btnUltimoRegistro4 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
         btnUltimoRegistro5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,7 +150,12 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
-        btnUltimoRegistro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/page_delete.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/page_delete.png"))); // NOI18N
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         btnUltimoRegistro5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Exit.png"))); // NOI18N
         btnUltimoRegistro5.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +197,7 @@ public class frmTela extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEdit)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnUltimoRegistro4)
+                                .addComponent(btnDelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnUltimoRegistro5))
                             .addGroup(layout.createSequentialGroup()
@@ -246,7 +251,7 @@ public class frmTela extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnUltimoRegistro4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnUltimoRegistro5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,6 +368,29 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditActionPerformed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        String sql = "";
+        
+        try {
+            int resposta = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir o registro: ", "Confirmar Exclusão", JOptionPane.YES_NO_OPTION, 3);
+            if (resposta == 0) {
+                sql = "DELETE FROM tbclientes WHERE cod = " + codInt.getText();
+                int excluir = con_cliente.statement.executeUpdate(sql);
+                if (excluir == 1) {
+                    JOptionPane.showMessageDialog(null, "Exclusão realizada com sucesso!", "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+                    con_cliente.executaSQL("SELECT * FROM tbclientes ORDER BY cod");
+                    preencherTabela();
+                    con_cliente.resultset.first();
+                    mostrarDados();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Operação cancelada pelo usuário!", "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+                }
+            }
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro na exclusão: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -452,10 +480,10 @@ public class frmTela extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAvancarRegistro;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnPrimeiroRegistro;
     private javax.swing.JButton btnUltimoRegistro;
-    private javax.swing.JButton btnUltimoRegistro4;
     private javax.swing.JButton btnUltimoRegistro5;
     private javax.swing.JButton btnVoltarRegistro;
     private javax.swing.JTextField codInt;
