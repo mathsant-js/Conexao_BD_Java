@@ -443,9 +443,11 @@ public class frmTela extends javax.swing.JFrame {
             con_cliente.resultset.beforeFirst();
                 while (con_cliente.resultset.next()) {
                     modelo.addRow(new Object[]{
-                        con_cliente.resultset.getString("cod"), con_cliente.resultset.getString("cod"), 
-                        con_cliente.resultset.getString("nome"), con_cliente.resultset.getString("dt_nasc"), 
-                        con_cliente.resultset.getString("telefone"), con_cliente.resultset.getString("email")
+                        con_cliente.resultset.getString("cod"),
+                        con_cliente.resultset.getString("nome"),
+                        con_cliente.resultset.getString("dt_nasc"),
+                        con_cliente.resultset.getString("telefone"),
+                        con_cliente.resultset.getString("email")
                         }   
                     );
                 }
