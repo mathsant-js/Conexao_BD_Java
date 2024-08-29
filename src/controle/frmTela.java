@@ -58,7 +58,7 @@ public class frmTela extends javax.swing.JFrame {
         btnUltimoRegistro = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
         btnCadastrar = new javax.swing.JButton();
-        btnUltimoRegistro3 = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
         btnUltimoRegistro4 = new javax.swing.JButton();
         btnUltimoRegistro5 = new javax.swing.JButton();
 
@@ -143,7 +143,12 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
-        btnUltimoRegistro3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/page_white_edit.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/page_white_edit.png"))); // NOI18N
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnUltimoRegistro4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/page_delete.png"))); // NOI18N
 
@@ -185,7 +190,7 @@ public class frmTela extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnCadastrar)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnUltimoRegistro3)
+                                .addComponent(btnEdit)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnUltimoRegistro4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -234,7 +239,7 @@ public class frmTela extends javax.swing.JFrame {
                                 .addComponent(btnAvancarRegistro)
                                 .addComponent(btnUltimoRegistro))
                             .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUltimoRegistro3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -329,6 +334,35 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        String nome = nomeText.getText();
+        String dataNasc = dataText.getText();
+        String telefone = telefoneText.getText();
+        String email = emailText.getText();
+        String sql = "";
+        String msg = "";
+        
+         try {
+            if(codInt.getText().equals("")) {
+                sql = "INSERT INTO tbclientes (nome, telefone, email, dt_nasc) VALUES ('" +nome +"','" +telefone +"','" +email +"','" +dataNasc +"')";
+                msg = "Gravação de um novo registro";
+            } else {
+                sql = "UPDATE tbclientes SET nome='" + nome + "', telefone='" + telefone + "', email='" + email + "', dt_nasc='" + dataNasc + "' WHERE cod = " + codInt.getText();
+                msg = "Alteração de registro";
+            }
+            
+            con_cliente.statement.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, msg + " realizada com sucesso!", "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+            
+            con_cliente.executaSQL("SELECT * FROM tbclientes ORDER BY cod");
+            preencherTabela();
+            con_cliente.resultset.first();
+            mostrarDados();
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "Erro na gravação: " + erro, "Mensagem do Programa", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,9 +452,9 @@ public class frmTela extends javax.swing.JFrame {
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnAvancarRegistro;
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnPrimeiroRegistro;
     private javax.swing.JButton btnUltimoRegistro;
-    private javax.swing.JButton btnUltimoRegistro3;
     private javax.swing.JButton btnUltimoRegistro4;
     private javax.swing.JButton btnUltimoRegistro5;
     private javax.swing.JButton btnVoltarRegistro;
