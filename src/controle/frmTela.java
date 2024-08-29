@@ -60,7 +60,7 @@ public class frmTela extends javax.swing.JFrame {
         btnCadastrar = new javax.swing.JButton();
         btnEdit = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnUltimoRegistro5 = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         searchField = new javax.swing.JTextField();
 
@@ -162,10 +162,10 @@ public class frmTela extends javax.swing.JFrame {
             }
         });
 
-        btnUltimoRegistro5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Exit.png"))); // NOI18N
-        btnUltimoRegistro5.addActionListener(new java.awt.event.ActionListener() {
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgs/Exit.png"))); // NOI18N
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUltimoRegistro5ActionPerformed(evt);
+                btnExitActionPerformed(evt);
             }
         });
 
@@ -205,7 +205,7 @@ public class frmTela extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnDelete)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-                                .addComponent(btnUltimoRegistro5))
+                                .addComponent(btnExit))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(emailText, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -266,7 +266,7 @@ public class frmTela extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDelete, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnUltimoRegistro5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnExit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
@@ -325,9 +325,13 @@ public class frmTela extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnUltimoRegistroActionPerformed
 
-    private void btnUltimoRegistro5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoRegistro5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUltimoRegistro5ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        String[] opcoes = {"Sim", "Não"};
+        int resposta = JOptionPane.showOptionDialog(null, "Você deseja sair do programa?", "Mensagem do Programa", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+            if (resposta == 0) {
+                System.exit(0);
+            }
+    }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         codInt.setText("");
@@ -517,9 +521,9 @@ public class frmTela extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnPrimeiroRegistro;
     private javax.swing.JButton btnUltimoRegistro;
-    private javax.swing.JButton btnUltimoRegistro5;
     private javax.swing.JButton btnVoltarRegistro;
     private javax.swing.JTextField codInt;
     private javax.swing.JTextField dataText;
