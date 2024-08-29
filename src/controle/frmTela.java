@@ -411,7 +411,7 @@ public class frmTela extends javax.swing.JFrame {
 
     private void searchFieldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchFieldKeyReleased
         try {
-            String pesquisa = "SELECT * FROM tbclientes WHERE nome like '" + codInt.getText() +"%'";
+            String pesquisa = "SELECT * FROM tbclientes WHERE nome like '" + searchField.getText() +"%'";
             con_cliente.executaSQL(pesquisa);
             
             if (con_cliente.resultset.first()) {
